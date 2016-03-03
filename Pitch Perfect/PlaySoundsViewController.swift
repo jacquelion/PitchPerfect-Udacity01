@@ -23,7 +23,6 @@ class PlaySoundsViewController: UIViewController {
         // Do any additional setup after loading the view.
         audioPlayer = try! AVAudioPlayer(contentsOfURL: receivedAudio.filePathUrl)
         audioPlayer.enableRate = true
-
         audioEngine = AVAudioEngine()
         audioFile = try! AVAudioFile(forReading: receivedAudio.filePathUrl)
     }
@@ -34,17 +33,13 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func buttonPressSnail(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        audioStopAndReset()
         audioPlayer.rate = 0.5
         audioPlayer.play()
     }
 
     @IBAction func buttonPressRabbit(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        audioStopAndReset()
         audioPlayer.rate = 1.5
         audioPlayer.play()
     }
@@ -58,9 +53,7 @@ class PlaySoundsViewController: UIViewController {
     }
     
     func playAudioWithVariablePitch(pitch: Float) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        audioStopAndReset()
         
         let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -76,6 +69,12 @@ class PlaySoundsViewController: UIViewController {
         try! audioEngine.start()
         
         audioPlayerNode.play()
+    }
+    
+    func audioStopAndReset() {
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     @IBAction func buttonPressStop(sender: UIButton) {
