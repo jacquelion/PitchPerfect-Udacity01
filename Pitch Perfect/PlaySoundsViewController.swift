@@ -34,14 +34,12 @@ class PlaySoundsViewController: UIViewController {
     
     @IBAction func buttonPressSnail(sender: UIButton) {
         audioStopAndReset()
-        audioPlayer.rate = 0.5
-        audioPlayer.play()
+        playbackAtRate(0.5)
     }
 
     @IBAction func buttonPressRabbit(sender: UIButton) {
         audioStopAndReset()
-        audioPlayer.rate = 1.5
-        audioPlayer.play()
+        playbackAtRate(1.5)
     }
     
     @IBAction func buttonPressChipmunk(sender: UIButton) {
@@ -77,6 +75,11 @@ class PlaySoundsViewController: UIViewController {
         audioEngine.reset()
     }
     
+    func playbackAtRate(rate: Float) {
+        audioPlayer.rate = rate
+        audioPlayer.play()
+    }
+    
     @IBAction func buttonPressStop(sender: UIButton) {
         audioPlayer.stop()
     }
@@ -84,15 +87,4 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func slideVolume(sender: UISlider) {
         audioPlayer.volume = sliderVolume.value
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
